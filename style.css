@@ -1,0 +1,209 @@
+:root{--paper:#fafafa;--ink:#111;--muted:#777;--rail:185px;--masthead-height:clamp(76px,11.3vw,180px)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}a{color:inherit}button{color:inherit;font:inherit}button:focus-visible,a:focus-visible{outline:1px solid var(--ink);outline-offset:5px}.skip-link{position:fixed;left:20px;top:-70px;z-index:10;padding:12px;background:var(--paper)}.skip-link:focus{top:20px}
+.masthead{position:fixed;inset:0 0 auto var(--rail);height:auto;container-type:inline-size;padding:12px 20px;background:var(--paper);z-index:3;display:flex;align-items:flex-start;justify-content:center}h1{font-family:"Times New Roman",Times,serif;font-size:7.8cqw;line-height:1.05;font-weight:400;letter-spacing:.018em;white-space:nowrap;margin:0}h1 em{font-weight:400}
+main{position:fixed;top:var(--masthead-height);bottom:0;left:var(--rail);right:0;overflow-y:auto;scroll-behavior:smooth;padding:28px 40px 0}.opening{padding:9px 0 75px}h2{font-size:12px;line-height:1.4;font-weight:400;margin:0;text-align:center;letter-spacing:.015em}
+.gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));column-gap:36px;row-gap:95px;padding:0 10px}.figure{margin:0;min-width:0;display:flex;flex-direction:column;align-items:center}.image-button{display:block;width:100%;border:0;padding:0;background:transparent;cursor:zoom-in}.image-frame{height:105px;display:flex;align-items:center;justify-content:center}.image-frame img{display:block;max-width:min(110px,100%);max-height:105px;width:auto;height:auto;object-fit:contain}.figure figcaption{width:100%;max-width:155px;text-align:center;font-family:"Times New Roman",Times,serif;font-style:italic;font-size:10px;line-height:1.35;font-weight:400;margin-top:13px}.image-button:hover{opacity:.8}footer{margin:100px 0 0;padding:30px 0 35px;display:flex;justify-content:space-between;font-size:10px}footer a{text-decoration:none}
+.navigation{position:fixed;left:0;top:var(--masthead-height);bottom:0;width:var(--rail);padding:30px 18px 35px 24px;display:flex;align-items:center}.navigation ol{list-style:none;padding:0;margin:0;width:100%}.navigation li{padding:17px 0}.navigation li a,.upcoming{display:flex;align-items:baseline;gap:10px;font-size:10px;line-height:1.4;text-decoration:none}.nav-number{font-size:9px;font-variant-numeric:tabular-nums;min-width:14px}.upcoming{color:var(--muted)}.current a{color:var(--ink)}.current a>span:last-child{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+dialog{width:100vw;max-width:none;height:100dvh;max-height:none;border:0;padding:28px 40px;margin:0;background:var(--paper);color:var(--ink)}dialog[open]{display:flex;flex-direction:column}dialog::backdrop{background:var(--paper)}.viewer-toolbar{display:flex;align-items:center;justify-content:space-between;font-size:12px}.viewer-toolbar button{border:0;background:none;cursor:pointer;padding:10px 0 10px 20px}.viewer-toolbar button span{font-size:23px;margin-left:15px;vertical-align:middle}.viewer-stage{flex:1;min-height:0;display:grid;grid-template-columns:50px minmax(0,1fr) 50px;align-items:center;gap:20px;padding:24px 0}.viewer-stage img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}.image-arrow{border:0;background:none;font-size:28px;cursor:pointer;padding:12px}.viewer-caption{display:flex;align-items:baseline;justify-content:center;text-align:center;gap:20px;padding-top:16px}.viewer-caption p{margin:0}#viewer-caption{font-family:"Times New Roman",Times,serif;font-size:14px;font-style:italic}#viewer-file{display:none}
+@media(min-width:1450px){.gallery{grid-template-columns:repeat(5,minmax(0,1fr));column-gap:55px;row-gap:110px}.image-frame{height:115px}.image-frame img{max-width:min(120px,100%);max-height:115px}}
+@media(max-width:1100px){:root{--rail:165px}main{padding-left:25px;padding-right:25px}.gallery{grid-template-columns:repeat(5,minmax(0,1fr));column-gap:24px;row-gap:75px}.image-frame img{max-width:min(95px,100%);max-height:95px}.image-frame{height:95px}}
+@media(max-width:700px){:root{--rail:115px;--masthead-height:clamp(58px,13vw,85px)}.masthead{padding:10px}h1{font-size:7.6cqw;letter-spacing:.025em}main{padding:22px 16px 0}.opening{padding-bottom:55px}h2{font-size:10px}.navigation{padding:20px 8px 25px 12px}.navigation li a,.upcoming{gap:6px;font-size:9px}.nav-number{min-width:11px;font-size:8px}.gallery{grid-template-columns:repeat(5,minmax(0,1fr));gap:65px 12px;padding:0}.image-frame{height:90px}.image-frame img{max-width:100%;max-height:90px}.figure figcaption{font-size:9px;max-width:115px;margin-top:10px}footer{font-size:9px;gap:12px}dialog{padding:18px}.viewer-stage{grid-template-columns:24px minmax(0,1fr) 24px;gap:4px}.image-arrow{font-size:22px;padding:0}.viewer-caption{justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){main{scroll-behavior:auto}}
+/* Navigation and gallery share an inset independent of the title. */
+:root{--content-inset:56px}
+.masthead{left:0}
+main{padding-right:var(--content-inset)}
+.gallery{padding:0}
+.navigation{padding-left:var(--content-inset);padding-right:12px}
+.navigation li a,.upcoming{display:grid;grid-template-columns:14px minmax(0,1fr);gap:10px;align-items:baseline}
+.nav-number{text-align:left}
+.navigation li a>span:last-child,.upcoming>span:last-child{text-align:center}
+@media(max-width:700px){.navigation{padding-right:8px}.navigation li a,.upcoming{grid-template-columns:11px minmax(0,1fr);gap:6px}}
+/* Give centered chapter names room while retaining the shared left edge. */
+:root{--rail:240px}
+@media(max-width:1100px){:root{--rail:215px}}
+@media(max-width:700px){:root{--rail:140px}}
+
+@font-face{font-family:ProjectCaslon;src:local("ACaslonPro-Regular"),local("Adobe Caslon Pro");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:ProjectCaslon;src:local("ACaslonPro-Italic"),local("Adobe Caslon Pro Italic");font-weight:400;font-style:italic;font-display:swap}
+h1{font-family:ProjectCaslon,"Big Caslon",serif;font-weight:400;letter-spacing:.018em}
+main{padding-top:65px}
+@media(max-width:700px){main{padding-top:42px}}
+
+@media(max-width:700px){:root{--content-inset:28px}}
+
+.masthead{padding-top:22px}
+
+.navigation li{display:grid;grid-template-columns:14px minmax(0,1fr) 18px;column-gap:10px;align-items:center}
+.navigation li a,.navigation .upcoming{grid-column:1 / 3;grid-template-columns:14px minmax(0,1fr)}
+.navigation .nav-label{text-align:center}
+.chapter-return{grid-column:3;grid-row:1;justify-self:end;width:18px;padding:0;border:0;background:none;text-align:right;font-size:18px;line-height:1;font-weight:700;cursor:pointer}
+.chapter-return[hidden]{display:none}
+.navigation li:not(.current) .chapter-return{visibility:hidden;pointer-events:none}
+@media(max-width:700px){.navigation li{grid-template-columns:11px minmax(0,1fr) 15px;column-gap:6px}.navigation li a,.navigation .upcoming{grid-template-columns:11px minmax(0,1fr)}.chapter-return{width:15px;font-size:17px}}
+/* Belonging establishes the reading system before later chapters disrupt it. */
+.paper-section{padding-top:100px;padding-bottom:130px}
+.paper{width:min(100%,600px);margin:0 auto}
+.paper-header{margin-bottom:64px}
+.chapter-kicker{margin:0 0 27px;font-size:11px;letter-spacing:.06em}
+.paper-header h2{font-family:ProjectCaslon,"Big Caslon",serif;font-size:44px;line-height:1.1;font-weight:400;letter-spacing:0;text-align:left;margin:0 0 30px}
+.paper-author{font-size:15px;margin:0 0 6px}.paper-affiliation{font-size:12px;margin:0 0 22px}
+.paper-publication{font-size:11px;line-height:1.65;margin:0;color:#555}
+.paper-body{font-size:16px;line-height:1.65;letter-spacing:0;text-align:justify;text-justify:inter-word;hyphens:auto;overflow-wrap:normal}
+.paper-body p{margin:0 0 1.3em;text-indent:0}
+.paper-body h3{font-size:17px;line-height:1.4;font-weight:500;text-align:left;letter-spacing:0;margin:2.8em 0 1.2em;hyphens:none}
+.paper-body h3:first-child{margin-top:0}
+.paper-body blockquote{font-size:14px;line-height:1.65;margin:1.8em 26px;text-indent:0}
+.title-word{display:inline-block;transform-origin:50% 65%}
+.title-word{position:relative}
+@media(max-width:700px){.paper-section{padding-top:70px}.paper-header h2{font-size:30px}.paper-body{font-size:14px;line-height:1.65}.paper-body h3{font-size:15px}.paper-body blockquote{font-size:12px;margin-left:12px;margin-right:12px}}
+
+
+/* Familiar reading rhythm, progressively displaced. */
+.translation-credit{font-size:11px;line-height:1.6;margin:20px 0 0;color:#555}
+.estranged-paper{width:min(100% - 72px,600px)}
+.estranged-body{counter-reset:excerpt}
+.estranged-paragraph{position:relative;--drift:0px;--angle:0deg;margin-bottom:48px;transform:translateX(0);transition:transform 850ms cubic-bezier(.2,.7,.2,1);outline-offset:12px}
+.estranged-paragraph.has-arrived{transform:translateX(var(--drift)) rotate(var(--angle))}
+.estranged-paragraph:nth-child(2){--drift:16px}
+.estranged-paragraph:nth-child(3){--drift:-22px;--angle:-.3deg}
+.estranged-paragraph:nth-child(4){--drift:28px}
+.estranged-paragraph:nth-child(5){--drift:-12px;--angle:.45deg}
+.estranged-paragraph:nth-child(6){--drift:34px}
+.estranged-paragraph:nth-child(7){--drift:-26px;--angle:-.5deg}
+.estranged-paragraph:nth-child(8){--drift:22px}
+.estranged-paragraph:nth-child(9){--drift:-32px;--angle:.6deg}
+.estranged-paragraph:hover,.estranged-paragraph:focus-visible{transform:translateX(0) rotate(0deg)}
+.paragraph-number{position:absolute;right:calc(100% + 24px);top:5px;font-size:10px;line-height:1.4;font-variant-numeric:tabular-nums;color:#777;transition:transform 700ms ease}
+.estranged-paragraph:nth-child(3n) .paragraph-number{transform:translateY(24px)}
+.estranged-paragraph:hover .paragraph-number,.estranged-paragraph:focus-visible .paragraph-number{transform:translateY(0)}
+.estranged-body blockquote{font-family:ProjectCaslon,serif;font-size:21px;line-height:1.4;text-align:left;margin:28px 18px}
+.masthead .title-word{transition:transform 700ms cubic-bezier(.2,.7,.2,1)}
+.masthead[data-chapter="defamiliarization"] .title-word:nth-child(2){transform:translateY(5px) rotate(-1deg)}
+.masthead[data-chapter="defamiliarization"] .title-word:nth-child(3){transform:translateY(-6px)}
+.masthead[data-chapter="defamiliarization"] .title-word:nth-child(4){transform:translateY(3px)}
+@media(max-width:700px){.estranged-paper{width:calc(100% - 32px)}.estranged-paragraph.has-arrived{transform:translateX(calc(var(--drift) * .35))}.paragraph-number{right:calc(100% + 9px);font-size:8px}.estranged-body blockquote{font-size:17px;margin:24px 8px}}
+@media(prefers-reduced-motion:reduce){.estranged-paragraph,.masthead .title-word,.paragraph-number{transition:none}.estranged-paragraph.has-arrived{transform:none}}
+
+.excerpt-note{font-size:11px;line-height:1.6;color:#777;margin:18px 0 36px;text-align:left}
+/* The second chapter slides into its displaced alignment, without the print glitch. */
+.masthead[data-chapter="defamiliarization"] .title-word{transition:transform 1.25s cubic-bezier(.25,.65,.3,1)}
+.masthead[data-chapter="chance"] .title-word:nth-child(1){transform:translateY(-4px) rotate(-1deg)}
+.masthead[data-chapter="chance"] .title-word:nth-child(2){transform:translate(5px,10px) rotate(-3deg)}
+.masthead[data-chapter="chance"] .title-word:nth-child(3){transform:translate(-3px,-9px) rotate(2deg)}
+.masthead[data-chapter="chance"] .title-word:nth-child(4){transform:translateY(5px) rotate(1deg)}
+.derive-paper{width:min(calc(100% - 110px),600px)}
+.derive-block{position:relative;max-width:500px;margin:0 0 90px;transform:translateX(var(--wander-x,0px)) rotate(var(--wander-angle,0deg));transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.derive-block:nth-child(even){margin-left:60px}
+.derive-block:nth-child(3) .derive-body p{text-align:justify}
+@media(max-width:700px){.derive-paper{width:calc(100% - 34px)}.derive-block:nth-child(even){margin-left:12px}.derive-block{margin-bottom:65px}}
+@media(prefers-reduced-motion:reduce){.derive-block,.masthead[data-chapter="defamiliarization"] .title-word{transition:none}}
+/* Scroll changes the spacing of fixed lines, without moving the scroll target. */
+.derive-line{display:block;white-space:pre;letter-spacing:var(--reading-tracking,0em);transition:letter-spacing 140ms linear,transform 600ms cubic-bezier(.2,.7,.2,1);transform-origin:left center}
+.derive-body p{text-align:left;hyphens:none}
+.chance-word{display:inline;border:0;border-bottom:1px dotted #888;background:none;padding:0;font:inherit;letter-spacing:inherit;line-height:inherit;cursor:pointer}
+.derive-block.surprise .derive-line:nth-child(odd){transform:translateX(42px) skewX(-8deg)}
+.derive-block.surprise .derive-line:nth-child(even){transform:translateX(-30px);letter-spacing:-.13em}
+.masthead[data-chapter="chance"] .title-word{transition:transform 180ms linear}
+.masthead[data-chapter="chance"] .title-word:nth-child(1){transform:translateY(calc(var(--heading-drop,0px) * .3)) rotate(-1deg)}
+.masthead[data-chapter="chance"] .title-word:nth-child(2){transform:translate(5px,calc(5px + var(--heading-drop,0px))) rotate(calc(-1deg - var(--heading-turn,0deg)))}
+.masthead[data-chapter="chance"] .title-word:nth-child(3){transform:translate(-3px,calc(-6px + var(--heading-drop,0px) * .55)) rotate(2deg)}
+.masthead[data-chapter="chance"] .title-word:nth-child(4){transform:translateY(calc(3px + var(--heading-drop,0px) * .7)) rotate(1deg)}
+@media(prefers-reduced-motion:reduce){.derive-line,.masthead[data-chapter="chance"] .title-word{transition:none}}
+
+/* The invitation lives in the text; the paragraph responds before the click. */
+.chance-word{display:inline-block;position:relative;border-bottom:1px dotted #999;transition:transform 350ms ease,text-shadow 350ms ease}
+.derive-block.surprise .chance-word{transform:translateY(4px) rotate(6deg)}
+@media(prefers-reduced-motion:reduce){.chance-word{transition:none}}
+/* Entropy: voices detach, the reading plane collapses, the masthead falls into it. */
+.entropy-section{padding-top:140px;padding-bottom:65vh;overflow:visible}
+.entropy-paper{width:min(calc(100% - 120px),650px)}
+.entropy-body{font-size:17px;line-height:1.65;isolation:isolate}
+.entropy-unit{position:relative;margin-bottom:70px;transform:translate(var(--entropy-x,0px),var(--entropy-y,0px)) rotate(var(--entropy-angle,0deg));transition:transform 260ms ease;transform-origin:35% 40%}
+.entropy-unit:nth-child(3n){width:88%;margin-left:8%}
+.entropy-unit:nth-child(4n){width:94%;margin-left:-5%}
+.entropy-unit>p{letter-spacing:var(--entropy-tracking,0em);word-spacing:var(--entropy-space,0em);transition:letter-spacing 220ms ease,word-spacing 220ms ease}
+.entropy-quotation{margin:35px -35px!important;font-family:ProjectCaslon,serif;font-size:clamp(25px,3vw,42px)!important;line-height:1.08!important;text-align:left;transform:rotate(-2deg);position:relative;z-index:1}
+.quotation-trigger{font:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;background:transparent;border:0;padding:0;text-align:inherit;cursor:pointer;transition:transform 550ms cubic-bezier(.2,.7,.2,1),text-shadow 400ms ease;transform-origin:25% 50%}
+.entropy-quotation>.quotation-trigger{display:block;width:100%}
+.entropy-quotation cite{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;line-height:1.5;font-style:normal;margin:22px 0 0 20%;letter-spacing:0}
+.inline-quotation{display:inline;font-family:ProjectCaslon,serif;font-style:italic;font-size:1.3em;border-bottom:1px dotted #777}
+
+
+
+.masthead[data-chapter="order-disorder"]{background:transparent;pointer-events:none}
+.masthead h1{transition:transform 240ms linear}
+.masthead[data-chapter="order-disorder"] h1{transform:translateY(var(--entropy-fall,0px)) rotate(var(--entropy-title-angle,0deg));mix-blend-mode:multiply}
+.masthead[data-chapter="order-disorder"] .title-word:nth-child(1){transform:translateY(-4px) rotate(-2deg)}
+.masthead[data-chapter="order-disorder"] .title-word:nth-child(2){transform:translate(5px,calc(39px + var(--entropy-word-fall,0px))) rotate(-7deg)}
+.masthead[data-chapter="order-disorder"] .title-word:nth-child(3){transform:translate(-10px,12px) rotate(7deg)}
+.masthead[data-chapter="order-disorder"] .title-word:nth-child(4){transform:translateY(calc(27px - var(--entropy-word-fall,0px))) rotate(3deg)}
+@media(max-width:700px){.entropy-paper{width:calc(100% - 44px)}.entropy-body{font-size:14px}.entropy-quotation{margin:28px -8px!important}.entropy-section{padding-top:90px}}
+@media(prefers-reduced-motion:reduce){.entropy-unit,.quotation-trigger,.entropy-unit>p,.masthead h1{transition:none}}
+
+/* Once the masthead falls, its reserved band becomes part of the reading surface. */
+body.entropy-reading main{top:0;overflow-anchor:none}
+body.entropy-reading .masthead{background:transparent}
+
+.quotation-word{display:inline-block}
+.quotation-word.word-missing{visibility:hidden}
+.quote-debris-layer{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+body:not(.entropy-reading) .quote-debris-layer{display:none}
+.displaced-word{position:absolute;pointer-events:auto;border:0;background:none;padding:2px;color:var(--ink);font-family:ProjectCaslon,serif;line-height:1.05;cursor:pointer;max-width:70vw;overflow-wrap:anywhere}
+
+/* A first small loss of alignment: OUT falls less than chapter two's 5px. */
+.masthead[data-chapter="belonging"] .title-word:nth-child(2){transform:translateY(3px)}
+.masthead[data-chapter="belonging"] .title-word:nth-child(4){transform:translateY(1px)}
+.masthead[data-chapter="belonging"].belonging-hint .title-word:nth-child(2){animation:belonging-settle 1s ease-out both;transition:none}
+@keyframes belonging-settle{
+  0%{transform:translate(0,0)}
+  30%{transform:translate(0,4px)}
+  44%{transform:translate(-.6px,2px) rotate(-.2deg)}
+  58%{transform:translate(.5px,3.7px) rotate(.15deg)}
+  72%{transform:translate(-.3px,2.6px)}
+  85%{transform:translate(.2px,3.2px)}
+  100%{transform:translate(0,3px)}
+}
+@media(prefers-reduced-motion:reduce){.masthead[data-chapter="belonging"].belonging-hint .title-word:nth-child(2){animation:none}}
+
+/* One consistent affordance for interactive text throughout the papers. */
+.chance-word,.inline-quotation{border-bottom:0}
+.chance-word,.displaced-word,.quotation-word{
+  text-decoration-line:underline;
+  text-decoration-style:dotted;
+  text-decoration-color:currentColor;
+  text-decoration-thickness:1px;
+  text-underline-offset:.2em;
+  text-decoration-skip-ink:none;
+}
+.chance-word,.quotation-trigger,.displaced-word{transition:color 180ms ease;text-shadow:none}
+.chance-word:is(:hover,:focus-visible),.quotation-trigger:is(:hover,:focus-visible),.displaced-word:is(:hover,:focus-visible){color:#777;text-shadow:none}
+.chance-word:is(:hover,:focus-visible),.quotation-trigger:is(:hover,:focus-visible) .quotation-word,.displaced-word:is(:hover,:focus-visible){text-decoration-thickness:2px}
+/* A second spatial reading of the index; the original gallery remains intact. */
+.index-modes{display:flex;align-items:center;justify-content:flex-end;gap:22px;font-size:11px;margin:0 0 38px;min-height:18px}
+.index-modes button{border:0;background:none;padding:3px 0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:4px}
+.index-modes button[aria-pressed="true"]{text-decoration-style:solid}
+.index-modes button:hover{color:#777}
+#space-hint{font-size:10px;color:#777;margin-right:auto;order:-1}
+.gallery.is-space{display:block;position:relative;height:max(650px,calc(100dvh - var(--masthead-height) - 150px));overflow:hidden;perspective:1000px;isolation:isolate}
+.gallery.is-space .figure{position:absolute;left:0;top:0;width:130px;will-change:transform;transform-style:preserve-3d}
+.gallery.is-space .image-frame{height:110px}
+.gallery.is-space .image-frame img{max-width:125px;max-height:110px;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.gallery.is-space .image-button{cursor:grab;touch-action:none;user-select:none}
+.gallery.is-space .image-button:hover{opacity:1}
+.gallery.is-space .figure.is-dragging .image-button{cursor:grabbing}
+.gallery.is-space .figure figcaption{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:170px;max-width:170px;margin-top:6px;opacity:0;pointer-events:none;background:var(--paper);padding:3px;transition:opacity 150ms ease}
+.gallery.is-space .figure:hover figcaption,.gallery.is-space .figure:focus-within figcaption,.gallery.is-space .figure.is-dragging figcaption{opacity:1}
+@media(max-width:700px){.index-modes{gap:15px;flex-wrap:wrap;font-size:10px;margin-bottom:25px}#space-hint{width:100%;order:2;font-size:9px}.gallery.is-space{height:700px}.gallery.is-space .figure{width:95px}.gallery.is-space .image-frame img{max-width:90px;max-height:90px}.gallery.is-space .image-frame{height:90px}}
+/* Center the mode switch independently of its instructional hint. */
+.index-modes{position:relative;justify-content:center}
+#space-hint{position:absolute;left:0;top:calc(100% + 9px);margin:0;order:initial;width:auto}
+.gallery.is-space .figure figcaption{top:50%;left:50%;transform:translate(-50%,-50%);width:94%;max-width:none;margin:0;padding:0;background:transparent;color:#fff;font-size:11px;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.3)}
+@media(max-width:700px){#space-hint{left:50%;transform:translateX(-50%);white-space:nowrap;width:auto;order:initial}.index-modes{flex-wrap:nowrap}.gallery.is-space .figure figcaption{font-size:10px}}
+
+/* Captions live on an unscaled plane so depth never changes their point size. */
+.space-caption-layer{display:none}
+.gallery.is-space .figure figcaption{opacity:0!important}
+.gallery.is-space .space-caption-layer{display:block;position:absolute;inset:0;z-index:300;pointer-events:none}
+.space-caption{position:absolute;left:0;top:0;width:170px;text-align:center;font-family:"Times New Roman",Times,serif;font-style:italic;font-size:11px;line-height:1.35;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.3);opacity:0;transition:opacity 150ms ease}
+.space-caption.visible{opacity:1}
